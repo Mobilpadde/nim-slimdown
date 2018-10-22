@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Mobilpadde/slackdown.svg?branch=master)](https://travis-ci.org/Mobilpadde/slackdown)
+
 # slackdown
 ##### Because you deserve attributes
 
