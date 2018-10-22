@@ -1,9 +1,8 @@
-[![Build Status](https://travis-ci.org/ruivieira/nim-slimdown.svg?branch=master)](https://travis-ci.org/ruivieira/nim-slimdown)
-# nim-slimdown
+# slackdown
 
 ## About
 
-A simple pattern-based markdown parser based on Johnny Broadway's (<johnny@johnnybroadway.com>) [PHP Slimdown](https://gist.github.com/jbroadway/2836900).
+A simple form of markdown extended with attributes [nim-slimdown](https://github.com/ruivieira/nim-slimdown)
 
 ## Building
 
@@ -16,22 +15,37 @@ nimble install
 
 ## Usage
 
-```{nim}
-import slimdown
+```nim
+import slackdown 
 
-let markdown = """
-# Examples
+let toParse = """__slackdown__{.large .blue} is *awesome*{#red},
+and even works w/ **attributes**{attrs=true}
 
-##Bold
+ * All
+ * in 
+ * one
 
-This is a markdown *example*
+_weeeeeee_{.these #attributes data-are=awesome}
 """
 
-let html = slimdown.md(markdown)
+let html = slackdown.parse(toParse)
+```
 
-# <h1>Examples</h1>
-#
-# <h2>Bold</h2>
-#
-# This is a markdown <em>example</em>
+will equal to
+
+```html
+<strong class='large blue'>slackdown</strong> is <em id='red'>awesome</em>,
+and even works w/ <strong attrs='true'>attributes</strong>
+
+<ul>
+        <li>All</li>
+</ul>
+<ul>
+        <li>in</li>
+</ul>
+<ul>
+        <li>one</li>
+</ul>
+
+<em class='these 'id='attributes 'data-are='awesome'>weeeeeee</em>
 ```
