@@ -6,6 +6,14 @@ services:
 before_install:
     - docker pull nimlang/nim
 
-script:
-    - docker run nimlang/nim nim --version
-    - docker run -v "$(pwd):/project" -w /project nimlang/nim sh -c "nimble check && nimble test && nimble install -dy"
+jobs:
+    include:
+        - stage: check
+          script:
+            - docker run -v "$(pwd):/project" -w /project nimlang/nim sh -c "nimble check"
+        - stage: test
+          script:
+            - docker run -v "$(pwd):/project" -w /project nimlang/nim sh -c "nimble test"
+        - stage: install
+          script:
+            - docker run -v "$(pwd):/project" -w /project nimlang/nim sh -c "nimble install -dy"
