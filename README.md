@@ -2,7 +2,7 @@
 
 ## About
 
-A simple form of markdown extended with attributes [nim-slimdown](https://github.com/ruivieira/nim-slimdown)
+A simple form of markdown extended with attributes, based on [nim-slimdown](https://github.com/ruivieira/nim-slimdown)
 
 ## Building
 
