@@ -1,17 +1,17 @@
 import nre, strformat, strutils
 
 # https://regex101.com/r/IazFFl/2/
-let classesRe = re"(((?<=\{)|(?=\}))?(\s?\.([A-Za-z0-9]+)\s?)(?1)?)"
+let classesRe = re"(((?<=\{)|(?=\}))?(\s?\.([A-Za-z0-9i\-]+)\s?)(?1)?)"
 let classesFixRe = re"\."
 # https://regex101.com/r/6YwI53/3
 let classesTagRe = re"(?:\<(\w+)\>)(.+)(?:\<\/\w+\>)(?:\{)(class\=\'.*\')(?:\})"
 
-let idsRe = re"(((?<=\{)|(?=\}))?(\s?\#([A-Za-z0-9]+)\s?)(?1)?)"
+let idsRe = re"(((?<=\{)|(?=\}))?(\s?\#([A-Za-z0-9\-]+)\s?)(?1)?)"
 let idsFixRe = re"\#"
 let idsTagRe = re"(?:\<(\w+)\>)(.+)(?:\<\/\w+\>)(?:\{)(id\=\'.*\')(?:\})"
 
-let attrsRe = re"((?<=\{)|(?=\}))?(\s?([A-Za-z0-9]+)(\=)((?3))\s?)(?1)?"
-let attrsTagRe = re"(?:\<(\w+)\>)(.+)(?:\<\/\w+\>)(?:\{)((\w+)\=\'(.*)\')(?:\})"
+let attrsRe = re"((?<=\{)|(?=\}))?(\s?([A-Za-z0-9\-]+)(?:\=)((?3))\s?)(?1)?"
+let attrsTagRe = re"(?:\<(\w+)\>)(.+)(?:\<\/\w+\>)(?:\{)(([A-Za-z0-9\-]+)\=\'(.*)\')\s(?:\})"
 
 proc tagger(
     input: string,
@@ -35,8 +35,7 @@ proc attrTagger(
     taggerRe: Regex,
 ): string =
     let res = nre.replace(input, parserRe, proc(m: RegexMatch): string = 
-        echo m.captures[4]
-        return m.captures[2] & m.captures[3] & "'" & m.captures[4] & "'"
+        return "$1='$2' " % [m.captures[2], m.captures[3]]
     )
 
     return nre.replace(res, taggerRe, proc(m: RegexMatch): string =

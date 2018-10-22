@@ -1,4 +1,5 @@
 # slackdown
+##### Because you deserve attributes
 
 ## About
 
@@ -19,7 +20,7 @@ nimble install
 import slackdown 
 
 let toParse = """__slackdown__{.large .blue} is *awesome*{#red},
-and even works w/ **attributes**{attrs=true}
+and even works w/ **attributes**{data-attrs=true}
 
  * All
  * in 
@@ -35,7 +36,7 @@ will equal to
 
 ```html
 <strong class='large blue'>slackdown</strong> is <em id='red'>awesome</em>,
-and even works w/ <strong attrs='true'>attributes</strong>
+and even works w/ <strong data-attrs='true'>attributes</strong>
 
 <ul>
         <li>All</li>

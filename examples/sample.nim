@@ -2,7 +2,7 @@ import strformat
 import ../src/slackdown 
 
 let toParse = """__slackdown__{.large .blue} is *awesome*{#red},
-and even works w/ **attributes**{attrs=true}
+and even works w/ **attributes**{data-attrs=true}
 
  * All
  * in 
